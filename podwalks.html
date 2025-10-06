@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>engage CRC PodWalks</title>
     <link rel="stylesheet" href="style2.css">
 </head>
@@ -15,86 +14,68 @@
 
     <main>
         <div class="intro">
-            <p>Deze geluidsfragmenten zijn gemaakt door de <a href="/index.html">Creative Research Crew</a> tijdens de
-                workshop PodWalk making
-                door <a href="maeheritage.com">MAE
-                    Heritage</a>, als onderdeel van het engage wijkprogramma. Beluister ze hieronder!
+            <p>
+                Deze geluidsfragmenten zijn gemaakt door de
+                <a href="/index.html">Creative Research Crew</a> tijdens de workshop PodWalk making
+                door <a href="https://maeheritage.com">MAE Heritage</a>, als onderdeel van het engage wijkprogramma.
+                Beluister ze hieronder!
             </p>
         </div>
-
+        <div id="audio-grid"></div>
     </main>
-
-    <div id="audio-grid">
-        <!-- Audio files will load here automatically -->
-    </div>
-
-
 
     <img class="logo" src="/img/logo.png" alt="">
 
-
-
+    <!-- Load the Google API client library -->
+    <script src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
 
     <script>
-        // Load the Google API client library
-        function loadClient() {
+        function handleClientLoad() {
+            console.log("Google API client loaded.");
+            gapi.load("client", initClient);
+        }
+
+        function initClient() {
             gapi.client.init({
-                apiKey: 'AIzaSyBzAOT0INbCOdYgdU8R-JMTGvcD8tuo_-w', // Replace with your actual API key
+                apiKey: '9ee0ac0166cdb3ddc65410f6f47bf0672acba06b', // replace with your actual API key
                 discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-            }).then(function () {
-                // After initializing the API, call the function to list files
-                listFiles();
-            });
+            }).then(listFiles);
         }
 
-        // Load the Google API client library asynchronously
-        function loadGoogleDriveAPI() {
-            gapi.load("client", loadClient);
-        }
-
-        // List files in the shared folder and display them
         async function listFiles() {
             try {
-                const folderId = '1JppArjXxHW8rOgUYvecq0OvIEtJCfuGP'; // Replace with your folder ID
+                const folderId = '1JppArjXxHW8rOgUYvecq0OvIEtJCfuGP'; // your folder ID
                 const response = await gapi.client.drive.files.list({
-                    q: `'${folderId}' in parents and mimeType='audio/mpeg'`, // Query for MP3 files
+                    q: `'${folderId}' in parents and mimeType='audio/mpeg'`,
                     fields: 'files(id, name, webContentLink)',
                 });
 
                 const files = response.result.files;
-                if (files && files.length > 0) {
-                    const grid = document.getElementById('audio-grid');
-                    files.forEach(file => {
-                        const displayName = file.name
-                            .replace('.mp3', '')
-                            .replace(/[-_]/g, ' ')
-                            .replace(/\b\w/g, c => c.toUpperCase());
-
-                        const card = document.createElement('div');
-                        card.className = 'audio-card';
-                        card.innerHTML = `
-            <h2>${displayName}</h2>
-            <audio controls src="${file.webContentLink}"></audio>
-          `;
-                        grid.appendChild(card);
-                    });
-                } else {
-                    console.log('No audio files found.');
+                if (files.length === 0) {
+                    console.log("No audio files found.");
+                    return;
                 }
+
+                const grid = document.getElementById('audio-grid');
+                files.forEach(file => {
+                    const displayName = file.name
+                        .replace('.mp3', '')
+                        .replace(/[-_]/g, ' ')
+                        .replace(/\b\w/g, c => c.toUpperCase());
+
+                    const card = document.createElement('div');
+                    card.className = 'audio-card';
+                    card.innerHTML = `
+            <h2>${displayName}</h2>
+            <audio controls src="https://drive.google.com/uc?id=${file.id}&export=download"></audio>
+          `;
+                    grid.appendChild(card);
+                });
             } catch (err) {
                 console.error('Error fetching files:', err);
             }
         }
-
-        // Initialize the Google API client
-        loadGoogleDriveAPI();
     </script>
-
-    <!-- Include the Google API client library -->
-    <script src="https://apis.google.com/js/api.js"></script>
-
-
-
 </body>
 
 </html>
