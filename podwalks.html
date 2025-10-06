@@ -21,15 +21,14 @@
                 Beluister ze hieronder!
             </p>
         </div>
+
         <div id="audio-grid"></div>
     </main>
 
     <img class="logo" src="/img/logo.png" alt="">
 
-    <!-- Load the Google API client library -->
-    <script src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
-
     <script>
+        // Called after the gapi script is loaded
         function handleClientLoad() {
             console.log("Google API client loaded.");
             gapi.load("client", initClient);
@@ -37,26 +36,27 @@
 
         function initClient() {
             gapi.client.init({
-                apiKey: '9ee0ac0166cdb3ddc65410f6f47bf0672acba06b', // replace with your actual API key
+                apiKey: 'YOUR_API_KEY_HERE', // Replace with your actual API key
                 discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
             }).then(listFiles);
         }
 
         async function listFiles() {
             try {
-                const folderId = '1JppArjXxHW8rOgUYvecq0OvIEtJCfuGP'; // your folder ID
+                const folderId = '1JppArjXxHW8rOgUYvecq0OvIEtJCfuGP'; // your Google Drive folder ID
                 const response = await gapi.client.drive.files.list({
                     q: `'${folderId}' in parents and mimeType='audio/mpeg'`,
-                    fields: 'files(id, name, webContentLink)',
+                    fields: 'files(id, name)',
                 });
 
                 const files = response.result.files;
-                if (files.length === 0) {
+                if (!files || files.length === 0) {
                     console.log("No audio files found.");
                     return;
                 }
 
                 const grid = document.getElementById('audio-grid');
+
                 files.forEach(file => {
                     const displayName = file.name
                         .replace('.mp3', '')
@@ -76,6 +76,10 @@
             }
         }
     </script>
+
+    <!-- Load Google API AFTER all scripts are defined -->
+    <script src="https://apis.google.com/js/api.js" onload="handleClientLoad()"></script>
+
 </body>
 
 </html>
