@@ -1,0 +1,117 @@
+@font-face {
+  font-family: "OS Attempt Beta";
+  src: url("fonts/OSAttemptBetav3-Regular.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "OS Attempt Beta";
+  src: url("fonts/OSAttemptBetav3-Bold.otf") format("opentype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "OS Attempt Beta";
+  src: url("fonts/OSAttemptBetav3-Italic.otf") format("opentype");
+  font-style: italic;
+}
+
+body {
+  font-family: "OS Attempt Beta", sans-serif;
+  margin: 0;
+  background: #dae700;
+  color: #000;
+  padding: 1rem;
+}
+
+header {
+  padding: 1vh;
+  text-align: left;
+  color: #ff5113;
+  margin: 1vh;
+}
+
+h1 {
+  font-weight: 700;
+  margin: 0;
+}
+
+main {
+  margin: 1vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1vh;
+  padding: 1vh;
+}
+
+p {
+  color: #761e35;
+}
+
+#intro {
+  max-width: 40rem;
+}
+
+.faces {
+  width: 10rem;
+  position: relative;
+  top: 10%;
+  right: 10%;
+  z-index: -1; /* optional: make sure it stays on top */
+  padding: 5rem;
+}
+
+.face1 {
+  rotate: 30deg;
+  width: 10rem;
+  margin: 3rem;
+}
+
+.face2 {
+  rotate: -20deg;
+  width: 10rem;
+  margin: 3rem 15rem;
+}
+
+.face3 {
+  rotate: -3deg;
+  width: 10rem;
+  margin: 5rem;
+}
+
+button {
+  background-color: #ff5113;
+  border: none;
+  padding: 0.6rem;
+}
+
+button a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.podwalks a {
+  color: black;
+}
+
+.podwalks {
+  width: 10rem;
+  position: fixed;
+  top: 1rem; /* distance from bottom */
+  left: 40vw; /* distance from right */
+  z-index: 1000; /* optional: make sure it stays on top */
+  border-radius: 50px;
+  background-color: white;
+  width: fit-content;
+  padding: 1rem;
+}
+
+.logo {
+  width: 10rem;
+  position: fixed;
+  bottom: 10px; /* distance from bottom */
+  right: 20px; /* distance from right */
+
+  z-index: 1000; /* optional: make sure it stays on top */
+}

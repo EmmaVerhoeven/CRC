@@ -1,0 +1,98 @@
+@font-face {
+  font-family: "OS Attempt Beta";
+  src: url("fonts/OSAttemptBetav3-Regular.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "OS Attempt Beta";
+  src: url("fonts/OSAttemptBetav3-Bold.otf") format("opentype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "OS Attempt Beta";
+  src: url("fonts/OSAttemptBetav3-Italic.otf") format("opentype");
+  font-style: italic;
+}
+
+body {
+  font-family: "OS Attempt Beta", sans-serif;
+  margin: 0;
+  background: #dae700;
+  color: #000;
+  padding: 1rem;
+}
+
+header {
+  padding: 1rem;
+  text-align: left;
+  color: #ff5113;
+  margin: 1rem;
+}
+
+h1 {
+  font-weight: 700;
+  margin: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+p {
+  color: #761e35;
+}
+
+.intro {
+  grid-column: span 1;
+  max-width: 400px;
+}
+
+#audio-grid {
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 30vw;
+}
+
+.audio-card {
+  display: block;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: transform 0.1s ease;
+}
+
+.audio-card:hover {
+  transform: scale(1.02);
+}
+
+.audio-card h2 {
+  color: black;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.audio-card p {
+  color: black;
+}
+
+audio {
+  width: 100%;
+  outline: none;
+}
+
+.logo {
+  width: 10rem;
+  position: fixed;
+  bottom: 10px; /* distance from bottom */
+  right: 20px; /* distance from right */
+  z-index: 1000; /* optional: make sure it stays on top */
+}

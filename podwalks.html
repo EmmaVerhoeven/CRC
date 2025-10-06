@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>engage CRC PodWalks</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    <header>
+        <h1>PodWalks door Cool Zuid</h1>
+    </header>
+
+    <main>
+        <div class="intro">
+            <p>Deze geluidsfragmenten zijn gemaakt door de <a href="/index.html">Creative Research Crew</a> tijdens de
+                workshop PodWalk making
+                door <a href="maeheritage.com">MAE
+                    Heritage</a>, als onderdeel van het engage wijkprogramma. Beluister ze hieronder!
+            </p>
+        </div>
+
+    </main>
+
+    <div id="audio-grid">
+        <!-- Audio files will load here automatically -->
+    </div>
+
+
+
+    <img class="logo" src="/img/logo.png" alt="">
+
+
+
+
+    <script>
+        async function loadAudioFiles() {
+            try {
+                const response = await fetch('audio/');
+                const text = await response.text();
+                const parser = new DOMParser();
+                const html = parser.parseFromString(text, 'text/html');
+                const links = [...html.querySelectorAll('a')];
+
+                const mp3s = links
+                    .map(a => a.href.split('/').pop())
+                    .filter(name => name.endsWith('.mp3'));
+
+                const grid = document.getElementById('audio-grid');
+
+                mp3s.forEach(name => {
+                    const displayName = name
+                        .replace('.mp3', '')
+                        .replace(/[-_]/g, ' ')
+                        .replace(/\b\w/g, c => c.toUpperCase());
+
+                    const card = document.createElement('div');
+                    card.className = 'audio-card';
+                    card.innerHTML = `
+            <h2>${displayName}</h2>
+            <audio controls src="audio/${encodeURIComponent(name)}"></audio>
+          `;
+                    grid.appendChild(card);
+                });
+            } catch (err) {
+                console.error('Could not load audio files:', err);
+            }
+        }
+
+        loadAudioFiles();
+    </script>
+
+
+</body>
+
+</html>
