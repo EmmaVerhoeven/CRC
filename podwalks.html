@@ -36,41 +36,63 @@
 
 
     <script>
-        async function loadAudioFiles() {
+        // Load the Google API client library
+        function loadClient() {
+            gapi.client.init({
+                apiKey: 'AIzaSyBzAOT0INbCOdYgdU8R-JMTGvcD8tuo_-w', // Replace with your actual API key
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+            }).then(function () {
+                // After initializing the API, call the function to list files
+                listFiles();
+            });
+        }
+
+        // Load the Google API client library asynchronously
+        function loadGoogleDriveAPI() {
+            gapi.load("client", loadClient);
+        }
+
+        // List files in the shared folder and display them
+        async function listFiles() {
             try {
-                const response = await fetch('audio/');
-                const text = await response.text();
-                const parser = new DOMParser();
-                const html = parser.parseFromString(text, 'text/html');
-                const links = [...html.querySelectorAll('a')];
-
-                const mp3s = links
-                    .map(a => a.href.split('/').pop())
-                    .filter(name => name.endsWith('.mp3'));
-
-                const grid = document.getElementById('audio-grid');
-
-                mp3s.forEach(name => {
-                    const displayName = name
-                        .replace('.mp3', '')
-                        .replace(/[-_]/g, ' ')
-                        .replace(/\b\w/g, c => c.toUpperCase());
-
-                    const card = document.createElement('div');
-                    card.className = 'audio-card';
-                    card.innerHTML = `
-            <h2>${displayName}</h2>
-            <audio controls src="audio/${encodeURIComponent(name)}"></audio>
-          `;
-                    grid.appendChild(card);
+                const folderId = '1JppArjXxHW8rOgUYvecq0OvIEtJCfuGP'; // Replace with your folder ID
+                const response = await gapi.client.drive.files.list({
+                    q: `'${folderId}' in parents and mimeType='audio/mpeg'`, // Query for MP3 files
+                    fields: 'files(id, name, webContentLink)',
                 });
+
+                const files = response.result.files;
+                if (files && files.length > 0) {
+                    const grid = document.getElementById('audio-grid');
+                    files.forEach(file => {
+                        const displayName = file.name
+                            .replace('.mp3', '')
+                            .replace(/[-_]/g, ' ')
+                            .replace(/\b\w/g, c => c.toUpperCase());
+
+                        const card = document.createElement('div');
+                        card.className = 'audio-card';
+                        card.innerHTML = `
+            <h2>${displayName}</h2>
+            <audio controls src="${file.webContentLink}"></audio>
+          `;
+                        grid.appendChild(card);
+                    });
+                } else {
+                    console.log('No audio files found.');
+                }
             } catch (err) {
-                console.error('Could not load audio files:', err);
+                console.error('Error fetching files:', err);
             }
         }
 
-        loadAudioFiles();
+        // Initialize the Google API client
+        loadGoogleDriveAPI();
     </script>
+
+    <!-- Include the Google API client library -->
+    <script src="https://apis.google.com/js/api.js"></script>
+
 
 
 </body>
