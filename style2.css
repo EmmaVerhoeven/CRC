@@ -20,7 +20,7 @@
 /* ---------- GLOBAL STYLES ---------- */
 body {
   font-family: "OS Attempt Beta", sans-serif;
-  margin: 0;
+  margin: auto;
   background: #dae700;
   color: #000;
   padding: 0;
@@ -30,13 +30,13 @@ body {
 header {
   padding: 2rem 1rem 1rem;
   text-align: center;
-  color: #ff5113;
 }
 
 h1 {
   font-weight: 700;
   margin: 0;
   font-size: 2rem;
+  color: #ff5113;
 }
 
 main {

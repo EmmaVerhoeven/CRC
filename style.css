@@ -1,3 +1,4 @@
+/* ---------- FONT SETUP ---------- */
 @font-face {
   font-family: "OS Attempt Beta";
   src: url("fonts/OSAttemptBetav3-Regular.otf") format("opentype");
@@ -16,103 +17,148 @@
   font-style: italic;
 }
 
+/* ---------- GLOBAL STYLES ---------- */
 body {
   font-family: "OS Attempt Beta", sans-serif;
   margin: 0;
-  background: #dae700;
+  padding: 0;
+  background-color: #dae700;
   color: #000;
-  padding: 1rem;
-  height: 200vh;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+/* ---------- HEADER ---------- */
 header {
-  padding: 1vh;
+  padding: 2rem 1rem 1rem 15rem;
+
   text-align: left;
-  color: #ff5113;
-  margin: 1vh;
-  margin-top: 4vh;
 }
 
 h1 {
+  color: #ff5113;
   font-weight: 700;
-  margin: 0;
+  font-size: 2.2rem;
 }
 
+/* ---------- MAIN CONTENT ---------- */
 main {
-  margin: 1vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1vh;
-  padding: 1vh;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 1rem;
+  position: relative;
 }
 
-p {
-  color: #761e35;
-}
-
+/* ---------- INTRO SECTION ---------- */
 #intro {
-  max-width: 40rem;
+  max-width: 650px;
+  margin-top: 2rem; /* Added margin-top for spacing */
+  position: relative;
+  z-index: 2;
 }
 
+#intro p {
+  color: #761e35;
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* ---------- FACES (achtergrond-elementen) ---------- */
 .faces {
+  position: absolute;
+  top: 0;
+  right: -10rem;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.faces img {
+  position: absolute;
   width: 10rem;
-  position: fixed;
-  top: 20vh;
-  z-index: -50; /* optional: make sure it stays on top */
-  padding: 5rem;
 }
 
 .face1 {
-  rotate: 30deg;
-  width: 8rem;
-  margin-top: 30vh;
+  top: 1vh;
+  right: 8rem;
+  transform: rotate(30deg);
 }
 
 .face2 {
-  rotate: -20deg;
-  width: 8rem;
-  margin: 3rem 15rem;
+  top: 30vh;
+  right: 2rem;
+  transform: rotate(-20deg);
 }
 
 .face3 {
-  rotate: -3deg;
+  top: 55vh;
+  right: 10rem;
+  transform: rotate(-3deg);
+}
+
+/* ---------- PODWALKS BUTTON ---------- */
+
+/* ---------- LOGO ---------- */
+.logo {
   width: 8rem;
-  margin: 5rem;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 200;
 }
 
+/* ---------- BUTTONS ---------- */
+
+/* Algemene button basisstijl (optioneel) */
 button {
-  background-color: #ff5113;
+  font-family: inherit;
+  font-size: 1rem;
   border: none;
-  padding: 0.6rem;
+  border-radius: 40px;
+  padding: 0.8rem 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-button a {
+/* Oranje knop */
+.button-orange {
+  background-color: #ff5113;
+}
+
+.button-orange a {
   color: white;
-  text-decoration: none;
-  font-size: 1.2rem;
 }
 
-.podwalks a {
+.button-orange:hover {
+  background-color: #761e35; /* Bordeauxrood */
+}
+
+/* Podwalk knop */
+.button-podwalk {
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+.button-podwalk a {
   color: black;
 }
 
-.podwalks {
-  width: 10rem;
-  position: fixed;
-  top: 1rem; /* distance from bottom */
-  left: 40vw; /* distance from right */
-  z-index: 1000; /* optional: make sure it stays on top */
-  border-radius: 50px;
-  background-color: white;
-  width: fit-content;
-  padding: 1rem;
+.button-podwalk:hover {
+  background-color: black;
 }
 
-.logo {
-  width: 10rem;
-  position: fixed;
-  bottom: 10px; /* distance from bottom */
-  right: 20px; /* distance from right */
-
-  z-index: 1000; /* optional: make sure it stays on top */
+.button-podwalk:hover a {
+  color: white;
 }
