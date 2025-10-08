@@ -115,3 +115,9 @@ audio {
   right: 2rem;
   z-index: 1000;
 }
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.9rem;
+  }
+}

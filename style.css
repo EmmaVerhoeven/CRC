@@ -162,3 +162,12 @@ button {
 .button-podwalk:hover a {
   color: white;
 }
+
+@media (max-width: 768px) {
+  .faces {
+    display: none;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+}
