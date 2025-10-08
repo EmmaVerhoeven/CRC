@@ -73,6 +73,10 @@ a {
   font-weight: 700;
 }
 
+a:visited {
+  color: grey;
+}
+
 /* ---------- FACES (achtergrond-elementen) ---------- */
 .faces {
   position: absolute;
@@ -279,6 +283,24 @@ button {
   margin-bottom: 1rem;
   font-size: 1rem;
   line-height: 1.4;
+}
+
+.details {
+  color: #ff5113;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.linkje {
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.linkje a {
+  color: grey;
+  text-decoration: underline;
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 /* Voor grotere schermen: twee kolommen */
